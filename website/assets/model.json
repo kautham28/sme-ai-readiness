@@ -1,0 +1,349 @@
+{
+  "model_name": "Logistic Regression",
+  "version": "1.0.0",
+  "score_min": 1.0,
+  "score_max": 5.0,
+  "score_step": 0.5,
+  "priority_weight": 1.6,
+  "priority_factors": [
+    "E2 PerceivedEaseOfUse",
+    "E3 TechnicalLiteracy",
+    "E7 Complexity",
+    "M2 FinancialCapability",
+    "M3 ITInfrastructure",
+    "M4 DataQualityStrategy"
+  ],
+  "feature_cols": [
+    "E1 PerceivedUsefulness",
+    "E2 PerceivedEaseOfUse",
+    "E3 TechnicalLiteracy",
+    "E5 TrustInAI",
+    "E6 FearOfJobLoss",
+    "E7 Complexity",
+    "E8 JobRelevance",
+    "E9 SocioTechnicalAlignment",
+    "E10 UserParticipation",
+    "M1 TopMgmtSupport",
+    "M2 FinancialCapability",
+    "M3 ITInfrastructure",
+    "M4 DataQualityStrategy",
+    "M5 InnovationCulture",
+    "M6 CompetitivePressure",
+    "M8 RegulatoryEnvironment",
+    "M9 VendorReadiness"
+  ],
+  "factors": [
+    {
+      "code": "E1",
+      "label": "Perceived Usefulness",
+      "group": "Employee",
+      "help": "How useful employees believe AI will be for their work",
+      "key": "E1 PerceivedUsefulness",
+      "priority": false
+    },
+    {
+      "code": "E2",
+      "label": "Perceived Ease of Use",
+      "group": "Employee",
+      "help": "How easy employees expect AI tools to be to learn and use",
+      "key": "E2 PerceivedEaseOfUse",
+      "priority": true
+    },
+    {
+      "code": "E3",
+      "label": "Technical Literacy",
+      "group": "Employee",
+      "help": "Employees' digital / technical skills to work with AI",
+      "key": "E3 TechnicalLiteracy",
+      "priority": true
+    },
+    {
+      "code": "E5",
+      "label": "Trust in AI",
+      "group": "Employee",
+      "help": "Confidence that AI recommendations and outputs are reliable",
+      "key": "E5 TrustInAI",
+      "priority": false
+    },
+    {
+      "code": "E6",
+      "label": "Fear of Job Loss",
+      "group": "Employee",
+      "help": "Concern that AI may replace roles (higher = more fear)",
+      "key": "E6 FearOfJobLoss",
+      "priority": false
+    },
+    {
+      "code": "E7",
+      "label": "Perceived Complexity",
+      "group": "Employee",
+      "help": "How complex AI systems feel to employees (higher = more complex)",
+      "key": "E7 Complexity",
+      "priority": true
+    },
+    {
+      "code": "E8",
+      "label": "Job Relevance",
+      "group": "Employee",
+      "help": "How relevant AI is to day-to-day job tasks",
+      "key": "E8 JobRelevance",
+      "priority": false
+    },
+    {
+      "code": "E9",
+      "label": "Socio-Technical Alignment",
+      "group": "Employee",
+      "help": "Fit between AI tools, workflows, and team practices",
+      "key": "E9 SocioTechnicalAlignment",
+      "priority": false
+    },
+    {
+      "code": "E10",
+      "label": "User Participation",
+      "group": "Employee",
+      "help": "How much employees are involved in AI decisions and rollout",
+      "key": "E10 UserParticipation",
+      "priority": false
+    },
+    {
+      "code": "M1",
+      "label": "Top Management Support",
+      "group": "Managerial",
+      "help": "Leadership commitment and sponsorship for AI adoption",
+      "key": "M1 TopMgmtSupport",
+      "priority": false
+    },
+    {
+      "code": "M2",
+      "label": "Financial Capability",
+      "group": "Managerial",
+      "help": "Budget and resources available to invest in AI",
+      "key": "M2 FinancialCapability",
+      "priority": true
+    },
+    {
+      "code": "M3",
+      "label": "IT Infrastructure",
+      "group": "Managerial",
+      "help": "Hardware, software, and connectivity readiness",
+      "key": "M3 ITInfrastructure",
+      "priority": true
+    },
+    {
+      "code": "M4",
+      "label": "Data Quality Strategy",
+      "group": "Managerial",
+      "help": "Quality, governance, and readiness of organizational data",
+      "key": "M4 DataQualityStrategy",
+      "priority": true
+    },
+    {
+      "code": "M5",
+      "label": "Innovation Culture",
+      "group": "Managerial",
+      "help": "Openness to experimentation and continuous improvement",
+      "key": "M5 InnovationCulture",
+      "priority": false
+    },
+    {
+      "code": "M6",
+      "label": "Competitive Pressure",
+      "group": "Managerial",
+      "help": "Market pressure to adopt AI to stay competitive",
+      "key": "M6 CompetitivePressure",
+      "priority": false
+    },
+    {
+      "code": "M8",
+      "label": "Regulatory Environment",
+      "group": "Managerial",
+      "help": "Awareness and readiness around AI-related regulations",
+      "key": "M8 RegulatoryEnvironment",
+      "priority": false
+    },
+    {
+      "code": "M9",
+      "label": "Vendor Readiness",
+      "group": "Managerial",
+      "help": "Access to capable AI vendors / implementation partners",
+      "key": "M9 VendorReadiness",
+      "priority": false
+    }
+  ],
+  "class_names": [
+    "High",
+    "Low",
+    "Medium"
+  ],
+  "scaler": {
+    "mean": [
+      3.824367088607595,
+      3.704113924050633,
+      3.6914556962025316,
+      3.5316455696202533,
+      3.2072784810126582,
+      2.9746835443037973,
+      3.6487341772151898,
+      3.6234177215189876,
+      3.662974683544304,
+      3.731012658227848,
+      3.8734177215189876,
+      3.8306962025316458,
+      3.6471518987341773,
+      3.7294303797468356,
+      3.757911392405063,
+      3.569620253164557,
+      3.634493670886076
+    ],
+    "scale": [
+      0.8894643058166548,
+      0.9614148525308315,
+      0.9212109023009803,
+      0.7959222504802121,
+      1.2823944912970755,
+      1.2056006806242334,
+      0.7965699681436488,
+      0.7349474898593128,
+      0.7972595542402935,
+      0.5586944431909336,
+      0.6922644663215911,
+      0.7939491240026445,
+      0.7035341091585818,
+      0.6972284587092188,
+      0.7274679111609991,
+      0.6595653402588876,
+      0.6704287759567219
+    ]
+  },
+  "logistic_regression": {
+    "C": 0.1,
+    "coefficients": [
+      [
+        0.2911892789274513,
+        0.2549696026109209,
+        0.3371906514954456,
+        0.13645089892779882,
+        -0.04172739015092157,
+        -0.2182710685208075,
+        0.18652886577696345,
+        0.15248238232595868,
+        0.03477882962805388,
+        -0.23070953541240932,
+        0.7527170537109701,
+        -0.1762962331630941,
+        0.43755658368960537,
+        -0.024420319688332838,
+        0.4417902109346601,
+        0.19758159583478155,
+        0.2370234096856864
+      ],
+      [
+        -0.44644691538746495,
+        -0.5993673064967711,
+        -0.690817658154154,
+        -0.33713369450637576,
+        -0.09109521589821115,
+        0.1445907314664168,
+        -0.30177963451379386,
+        -0.3386906426430982,
+        -0.21405543793063966,
+        0.02597904357681497,
+        0.020222538036035992,
+        -0.09260713483465836,
+        -0.16499764185691543,
+        0.060473054807140686,
+        -0.0638235021806895,
+        0.01122935277585837,
+        -0.03659145960841027
+      ],
+      [
+        0.15525763646001392,
+        0.3443977038858499,
+        0.3536270066587083,
+        0.20068279557857677,
+        0.1328226060491327,
+        0.07368033705439062,
+        0.11525076873683042,
+        0.18620826031713952,
+        0.1792766083025858,
+        0.20473049183559433,
+        -0.7729395917470062,
+        0.26890336799775233,
+        -0.2725589418326899,
+        -0.036052735118807896,
+        -0.37796670875397065,
+        -0.20881094861064003,
+        -0.2004319500772761
+      ]
+    ],
+    "intercepts": [
+      0.07388602500601532,
+      -1.234087934750054,
+      1.1602019097440384
+    ],
+    "classes": [
+      0,
+      1,
+      2
+    ]
+  },
+  "shap": {
+    "method": "linear_exact",
+    "feature_means": [
+      -0.26266628509542644,
+      -0.4325994216408089,
+      -0.49178741660740294,
+      -0.26792202878701715,
+      -0.0437520800065079,
+      -0.026626129149703533,
+      -0.20535566574276262,
+      -0.2729345568881004,
+      -0.2410123072177674,
+      0.05802022441473349,
+      0.40295514874768545,
+      0.03717131514425824,
+      0.2247637232734906,
+      0.06083449527672553,
+      0.02063809373256297,
+      -0.2875928623624238,
+      -0.01065517815725647
+    ],
+    "base_logits": [
+      -0.06594822393062982,
+      -0.252685878506686,
+      0.3186341024373156
+    ],
+    "note": "Exact Linear SHAP in log-odds space: phi_i,c = coef[c,i] * (x_i - E[x_i]). Advantages/disadvantages use contributions toward High readiness."
+  },
+  "metrics": {
+    "test_accuracy": 0.9340659340659341,
+    "test_f1_weighted": 0.9344794578244056,
+    "best_params": {
+      "solver": "lbfgs",
+      "penalty": "l2",
+      "C": 0.1
+    },
+    "n_train": 225,
+    "n_test": 91,
+    "n_smes": 21
+  },
+  "defaults": {
+    "E1 PerceivedUsefulness": 3.8,
+    "E2 PerceivedEaseOfUse": 3.7,
+    "E3 TechnicalLiteracy": 3.7,
+    "E5 TrustInAI": 3.5,
+    "E6 FearOfJobLoss": 3.2,
+    "E7 Complexity": 3.0,
+    "E8 JobRelevance": 3.6,
+    "E9 SocioTechnicalAlignment": 3.6,
+    "E10 UserParticipation": 3.7,
+    "M1 TopMgmtSupport": 3.7,
+    "M2 FinancialCapability": 3.9,
+    "M3 ITInfrastructure": 3.8,
+    "M4 DataQualityStrategy": 3.6,
+    "M5 InnovationCulture": 3.7,
+    "M6 CompetitivePressure": 3.8,
+    "M8 RegulatoryEnvironment": 3.6,
+    "M9 VendorReadiness": 3.6
+  }
+}

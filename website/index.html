@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SME AI Adoption Readiness</title>
+  <meta name="description" content="Score your SME across 17 AI adoption factors and get readiness level plus SHAP advantages and disadvantages — runs entirely in your browser." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <div>
+        <p class="brand-name">SME AI Readiness</p>
+        <p class="brand-tag">Logistic Regression · 17 factors · SHAP explainability</p>
+      </div>
+    </div>
+    <nav class="header-nav">
+      <a href="#assess">Assess</a>
+      <a href="#results">Results</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <h1>Know how ready your SME is for AI — in minutes.</h1>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#assess">Start assessment</a>
+          <button type="button" class="btn btn-ghost" id="btn-fill-average">Use sample averages</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="assess" class="assess">
+      <div class="section-head">
+        <h2>Factor scores</h2>
+        <p>Rate each factor from 1 (very low) to 5 (very high). Priority factors are marked and weighted ×1.6 in the model.</p>
+      </div>
+
+      <div class="org-row">
+        <label for="sme-name">SME / organization name <span class="optional">(optional)</span></label>
+        <input id="sme-name" type="text" placeholder="e.g. Sunrise Trading Co." maxlength="120" />
+      </div>
+
+      <div class="factor-groups">
+        <div class="factor-group">
+          <h3>Employee factors</h3>
+          <div id="employee-factors" class="factor-list"></div>
+        </div>
+        <div class="factor-group">
+          <h3>Managerial factors</h3>
+          <div id="manager-factors" class="factor-list"></div>
+        </div>
+      </div>
+
+      <div class="assess-actions">
+        <button type="button" class="btn btn-primary" id="btn-predict">Calculate readiness</button>
+        <button type="button" class="btn btn-ghost" id="btn-reset">Reset to averages</button>
+      </div>
+    </section>
+
+    <section id="results" class="results is-empty" aria-live="polite">
+      <div class="section-head">
+        <h2>Your results</h2>
+        <p id="results-sub">Submit scores above to see readiness and SHAP drivers.</p>
+      </div>
+
+      <div class="results-empty" id="results-placeholder">
+        <p>No assessment yet. Score the 17 factors and click <strong>Calculate readiness</strong>.</p>
+      </div>
+
+      <div class="results-body" id="results-body" hidden>
+        <div class="readiness-card">
+          <p class="panel-kicker">AI adoption readiness</p>
+          <p class="readiness-level" id="pred-level">—</p>
+          <p class="readiness-org" id="pred-org"></p>
+          <div class="prob-bars" id="prob-bars"></div>
+        </div>
+
+        <div class="shap-grid">
+          <article class="shap-card advantage">
+            <h3>Current advantages</h3>
+            <p class="shap-note">Factors pushing toward <em>High</em> readiness (positive Linear SHAP).</p>
+            <ol id="adv-list"></ol>
+          </article>
+          <article class="shap-card disadvantage">
+            <h3>Current disadvantages</h3>
+            <p class="shap-note">Factors holding readiness back (negative Linear SHAP toward High).</p>
+            <ol id="dis-list"></ol>
+          </article>
+        </div>
+
+        <div class="shap-all">
+          <h3>All factor contributions</h3>
+          <div class="waterfall" id="waterfall"></div>
+        </div>
+
+        <div class="advice-card" id="advice-card">
+          <div class="advice-head">
+            <div>
+              <p class="panel-kicker">Gemini advice</p>
+              <h3>Personalized recommendations</h3>
+              <p class="shap-note">Action plan generated from your readiness level and SHAP advantage / disadvantage factors.</p>
+            </div>
+            <button type="button" class="btn btn-ghost" id="btn-refresh-advice" hidden>Regenerate</button>
+          </div>
+          <div class="advice-body" id="advice-body">
+            <p class="advice-loading">Preparing advice…</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/config.local.js"></script>
+  <script src="js/app.js" type="module"></script>
+</body>
+</html>
