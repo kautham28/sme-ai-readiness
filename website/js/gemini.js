@@ -157,7 +157,9 @@ async function callGeminiOnce(apiKey, model, prompt) {
 export async function fetchGeminiAdvice(context, onAttempt = () => {}) {
   const { apiKey, model, fallbacks } = getGeminiConfig();
   if (!apiKey) {
-    throw new Error("Gemini API key is missing. Set window.GEMINI_API_KEY in config.local.js.");
+    throw new Error(
+      "Gemini API key is missing. On Netlify, add the environment variable GEMINI_API_KEY and redeploy. Locally, set window.GEMINI_API_KEY in js/config.local.js."
+    );
   }
 
   const prompt = buildAdvicePrompt(context);

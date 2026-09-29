@@ -163,7 +163,7 @@ function setAdviceError(message) {
     <div class="advice-error">
       <p><strong>Could not generate advice.</strong></p>
       <p>${safe}</p>
-      <p class="advice-hint">Check your Gemini API key / model in <code>js/config.js</code>, then click Regenerate.</p>
+      <p class="advice-hint">If this keeps happening, wait a minute and click Regenerate.</p>
     </div>
   `;
 }
