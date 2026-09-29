@@ -1,5 +1,7 @@
 [build]
   publish = "website"
+  # Writes the Gemini key from the Netlify environment variable GEMINI_API_KEY into the deployed site.
+  command = "echo \"window.GEMINI_API_KEY = '$GEMINI_API_KEY';\" > website/js/config.local.js"
 
 [[headers]]
   for = "/assets/*"

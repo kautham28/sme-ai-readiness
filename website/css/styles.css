@@ -591,9 +591,26 @@ main,
   color: var(--ink);
 }
 
+.advice-content ol {
+  margin: 0 0 0.9rem;
+  padding-left: 1.3rem;
+  color: var(--ink);
+}
+
 .advice-content li {
   margin-bottom: 0.35rem;
   line-height: 1.45;
+}
+
+.advice-content li.md-cont {
+  list-style: none;
+  color: var(--muted);
+}
+
+.advice-content hr {
+  border: none;
+  border-top: 1px solid rgba(212, 206, 192, 0.75);
+  margin: 1rem 0;
 }
 
 .waterfall {

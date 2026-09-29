@@ -1,5 +1,6 @@
 [build]
   publish = "."
+  command = "echo \"window.GEMINI_API_KEY = '$GEMINI_API_KEY';\" > js/config.local.js"
 
 [[headers]]
   for = "/assets/*"

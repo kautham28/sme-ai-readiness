@@ -77,17 +77,28 @@ Write practical advice for the SME owner. Requirements:
 7) Use markdown with short headings and bullets. No tables. Keep total length under 450 words.`;
 }
 
+function buildGenerationConfig(model) {
+  // Thinking tokens count toward maxOutputTokens, so the cap must leave room for the answer.
+  const config = { temperature: 0.6, maxOutputTokens: 8192 };
+  if (/^gemini-3/.test(model)) {
+    config.thinkingConfig = { thinkingLevel: "low" };
+  } else if (/^gemini-2\.5/.test(model)) {
+    config.thinkingConfig = { thinkingBudget: 512 };
+  }
+  return config;
+}
+
 async function callGeminiOnce(apiKey, model, prompt) {
-  const url = `${GEMINI_BASE}/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(apiKey)}`;
+  const url = `${GEMINI_BASE}/${encodeURIComponent(model)}:generateContent`;
   const res = await fetch(url, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "x-goog-api-key": apiKey,
+    },
     body: JSON.stringify({
       contents: [{ role: "user", parts: [{ text: prompt }] }],
-      generationConfig: {
-        temperature: 0.6,
-        maxOutputTokens: 1024,
-      },
+      generationConfig: buildGenerationConfig(model),
     }),
   });
 
@@ -102,13 +113,22 @@ async function callGeminiOnce(apiKey, model, prompt) {
     throw err;
   }
 
-  const text = data?.candidates?.[0]?.content?.parts
-    ?.map((p) => p.text || "")
+  const candidate = data?.candidates?.[0];
+  const text = (candidate?.content?.parts || [])
+    .filter((p) => !p.thought)
+    .map((p) => p.text || "")
     .join("")
     .trim();
 
   if (!text) {
-    throw new Error("Gemini returned an empty response. Try again.");
+    const reason = candidate?.finishReason || data?.promptFeedback?.blockReason;
+    const err = new Error(
+      reason
+        ? `Gemini returned no advice (reason: ${reason}). Try again.`
+        : "Gemini returned an empty response. Try again."
+    );
+    err.retryable = true;
+    throw err;
   }
   return text;
 }
@@ -144,12 +164,20 @@ export async function fetchGeminiAdvice(context) {
 export function markdownToHtml(md) {
   const lines = md.replace(/\r\n/g, "\n").split("\n");
   const html = [];
-  let inList = false;
+  let inList = null;
 
   const closeList = () => {
     if (inList) {
-      html.push("</ul>");
-      inList = false;
+      html.push(`</${inList}>`);
+      inList = null;
+    }
+  };
+
+  const openList = (tag) => {
+    if (inList !== tag) {
+      closeList();
+      html.push(`<${tag}>`);
+      inList = tag;
     }
   };
 
@@ -182,12 +210,23 @@ export function markdownToHtml(md) {
       html.push(`<h3>${inline(line.replace(/^#\s+/, ""))}</h3>`);
       continue;
     }
+    if (/^(-{3,}|\*{3,}|_{3,})$/.test(line)) {
+      closeList();
+      html.push("<hr />");
+      continue;
+    }
     if (/^[-*]\s+/.test(line)) {
-      if (!inList) {
-        html.push("<ul>");
-        inList = true;
-      }
+      openList("ul");
       html.push(`<li>${inline(line.replace(/^[-*]\s+/, ""))}</li>`);
+      continue;
+    }
+    if (/^\d+[.)]\s+/.test(line)) {
+      openList("ol");
+      html.push(`<li>${inline(line.replace(/^\d+[.)]\s+/, ""))}</li>`);
+      continue;
+    }
+    if (inList && /^\s+/.test(raw)) {
+      html.push(`<li class="md-cont">${inline(line)}</li>`);
       continue;
     }
     closeList();
