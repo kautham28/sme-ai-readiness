@@ -14,11 +14,12 @@ function getGeminiConfig() {
   return { apiKey, model, fallbacks };
 }
 
+const REQUEST_TIMEOUT_MS = 45000;
+
 function isRetryableGeminiError(status, message) {
   const msg = String(message || "").toLowerCase();
   return (
-    status === 429 ||
-    status === 503 ||
+    [404, 429, 500, 502, 503, 504].includes(status) ||
     msg.includes("high demand") ||
     msg.includes("resource exhausted") ||
     msg.includes("unavailable") ||
@@ -90,17 +91,33 @@ function buildGenerationConfig(model) {
 
 async function callGeminiOnce(apiKey, model, prompt) {
   const url = `${GEMINI_BASE}/${encodeURIComponent(model)}:generateContent`;
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-goog-api-key": apiKey,
-    },
-    body: JSON.stringify({
-      contents: [{ role: "user", parts: [{ text: prompt }] }],
-      generationConfig: buildGenerationConfig(model),
-    }),
-  });
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+  let res;
+  try {
+    res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-goog-api-key": apiKey,
+      },
+      body: JSON.stringify({
+        contents: [{ role: "user", parts: [{ text: prompt }] }],
+        generationConfig: buildGenerationConfig(model),
+      }),
+      signal: controller.signal,
+    });
+  } catch (networkErr) {
+    const err = new Error(
+      networkErr.name === "AbortError"
+        ? `${model} took too long to respond.`
+        : `Network error while contacting Gemini (${networkErr.message}).`
+    );
+    err.retryable = true;
+    throw err;
+  } finally {
+    clearTimeout(timer);
+  }
 
   const data = await res.json().catch(() => ({}));
   if (!res.ok) {
@@ -137,10 +154,10 @@ async function callGeminiOnce(apiKey, model, prompt) {
  * Calls Gemini generateContent and returns plain text advice.
  * Retries with fallback models when Google reports high demand / overload.
  */
-export async function fetchGeminiAdvice(context) {
+export async function fetchGeminiAdvice(context, onAttempt = () => {}) {
   const { apiKey, model, fallbacks } = getGeminiConfig();
   if (!apiKey) {
-    throw new Error("Gemini API key is missing. Set window.GEMINI_API_KEY in config.js.");
+    throw new Error("Gemini API key is missing. Set window.GEMINI_API_KEY in config.local.js.");
   }
 
   const prompt = buildAdvicePrompt(context);
@@ -148,15 +165,22 @@ export async function fetchGeminiAdvice(context) {
   let lastError = null;
 
   for (let i = 0; i < models.length; i++) {
+    onAttempt(models[i], i);
     try {
       return await callGeminiOnce(apiKey, models[i], prompt);
     } catch (err) {
       lastError = err;
+      console.warn(`Gemini model ${models[i]} failed:`, err.message);
       if (!err.retryable || i === models.length - 1) break;
-      await new Promise((r) => setTimeout(r, 700 * (i + 1)));
+      await new Promise((r) => setTimeout(r, 400));
     }
   }
 
+  if (lastError?.retryable) {
+    throw new Error(
+      "All Gemini models are busy right now (Google reports high demand). Please wait a minute and click Regenerate."
+    );
+  }
   throw lastError || new Error("Gemini request failed.");
 }
 

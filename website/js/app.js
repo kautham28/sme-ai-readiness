@@ -179,7 +179,12 @@ async function loadAdvice(context) {
   lastAdviceContext = context;
   setAdviceLoading();
   try {
-    const text = await fetchGeminiAdvice(context);
+    const text = await fetchGeminiAdvice(context, (model, attempt) => {
+      const status = document.querySelector("#advice-body .advice-loading p");
+      if (status && attempt > 0) {
+        status.textContent = `Main model is busy, trying backup model (${model})…`;
+      }
+    });
     setAdviceContent(text);
   } catch (err) {
     console.error(err);
