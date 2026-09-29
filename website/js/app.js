@@ -72,10 +72,14 @@ function buildFactorUI(model) {
     item.className = "factor-item";
     item.title = factor.help;
     item.innerHTML = `
-      <div class="factor-label">
-        <span class="factor-code">${factor.code}</span>${factor.label}
-        ${factor.priority ? '<span class="priority-pill" title="Priority factor, weighted ×1.6">P</span>' : ""}
+      <div class="factor-top">
+        <div class="factor-label">
+          <span class="factor-code">${factor.code}</span>${factor.label}
+          ${factor.priority ? '<span class="priority-pill" title="Priority factor, weighted ×1.6">×1.6</span>' : ""}
+        </div>
+        <div class="factor-value" data-value-for="${idx}">${Number(value).toFixed(1)}</div>
       </div>
+      <p class="factor-help">${factor.help}</p>
       <input
         type="range"
         min="${model.score_min}"
@@ -85,7 +89,7 @@ function buildFactorUI(model) {
         data-factor-idx="${idx}"
         aria-label="${factor.label}"
       />
-      <div class="factor-value" data-value-for="${idx}">${Number(value).toFixed(1)}</div>
+      <div class="scale-ends"><span>1</span><span>5</span></div>
     `;
     (factor.group === "Employee" ? employeeRoot : managerRoot).appendChild(item);
   });

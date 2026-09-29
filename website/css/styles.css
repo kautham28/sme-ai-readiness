@@ -178,9 +178,9 @@ main,
 
 .org-row {
   display: grid;
-  gap: 0.3rem;
-  margin-bottom: 0.9rem;
-  max-width: 360px;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+  max-width: 420px;
 }
 
 .org-row label {
@@ -195,74 +195,101 @@ main,
 
 .org-row input {
   border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 0.5rem 0.75rem;
+  border-radius: 12px;
+  padding: 0.75rem 0.9rem;
   font: inherit;
   background: #fffdf8;
 }
 
 .factor-groups {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 1rem;
 }
 
 .factor-group {
-  padding: 0.75rem 0.9rem 0.35rem;
+  padding: 0.9rem 1rem 1rem;
 }
 
 .factor-group h3 {
-  margin: 0 0 0.4rem;
+  margin: 0 0 0.7rem;
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 1.05rem;
+}
+
+.factor-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.6rem;
 }
 
 .factor-item {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(90px, 140px) 2.2rem;
+  padding: 0.55rem 0.7rem 0.5rem;
+  border: 1px solid rgba(212, 206, 192, 0.8);
+  border-radius: 10px;
+  background: #fffdf8;
+  transition: border-color 0.15s ease;
+}
+
+.factor-item:hover {
+  border-color: rgba(15, 107, 92, 0.45);
+}
+
+.factor-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.3rem 0;
-  border-top: 1px solid rgba(212, 206, 192, 0.55);
-  cursor: help;
 }
 
 .factor-label {
   font-weight: 600;
-  font-size: 0.84rem;
+  font-size: 0.86rem;
   line-height: 1.25;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  min-width: 0;
 }
 
 .factor-code {
   display: inline-block;
-  min-width: 2.1rem;
+  margin-right: 0.3rem;
   color: var(--accent-deep);
   font-weight: 700;
-  font-size: 0.76rem;
+  font-size: 0.78rem;
 }
 
 .priority-pill {
   display: inline-block;
-  margin-left: 0.3rem;
-  padding: 0 0.3rem;
+  margin-left: 0.25rem;
+  padding: 0.05rem 0.35rem;
   border-radius: 999px;
-  background: rgba(15, 107, 92, 0.14);
+  background: rgba(15, 107, 92, 0.12);
   color: var(--accent-deep);
   font-size: 0.62rem;
   font-weight: 700;
-  line-height: 1.4;
   vertical-align: middle;
 }
 
 .factor-value {
-  font-variant-numeric: tabular-nums;
-  font-weight: 700;
-  font-size: 0.85rem;
-  text-align: right;
+  flex-shrink: 0;
+  min-width: 2.2rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 6px;
+  background: rgba(15, 107, 92, 0.1);
   color: var(--accent-deep);
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.factor-help {
+  margin: 0.2rem 0 0.25rem;
+  color: var(--muted);
+  font-size: 0.74rem;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .factor-item input[type="range"] {
@@ -273,11 +300,19 @@ main,
   cursor: pointer;
 }
 
+.scale-ends {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 0.66rem;
+  margin-top: 0.05rem;
+}
+
 .assess-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .btn {
@@ -702,7 +737,10 @@ main,
 }
 
 @media (max-width: 960px) {
-  .factor-groups,
+  .factor-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .shap-grid {
     grid-template-columns: 1fr;
   }
@@ -722,5 +760,11 @@ main,
 
   .wf-val {
     text-align: left;
+  }
+}
+
+@media (max-width: 560px) {
+  .factor-list {
+    grid-template-columns: 1fr;
   }
 }
