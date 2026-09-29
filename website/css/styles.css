@@ -178,9 +178,9 @@ main,
 
 .org-row {
   display: grid;
-  gap: 0.4rem;
-  margin-bottom: 1.25rem;
-  max-width: 420px;
+  gap: 0.3rem;
+  margin-bottom: 0.9rem;
+  max-width: 360px;
 }
 
 .org-row label {
@@ -195,8 +195,8 @@ main,
 
 .org-row input {
   border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  padding: 0.5rem 0.75rem;
   font: inherit;
   background: #fffdf8;
 }
@@ -204,92 +204,80 @@ main,
 .factor-groups {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
+  gap: 1rem;
 }
 
 .factor-group {
-  padding: 1.1rem 1.1rem 0.4rem;
+  padding: 0.75rem 0.9rem 0.35rem;
 }
 
 .factor-group h3 {
-  margin: 0 0 0.85rem;
+  margin: 0 0 0.4rem;
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .factor-item {
-  padding: 0.85rem 0;
-  border-top: 1px solid rgba(212, 206, 192, 0.7);
-}
-
-.factor-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 0.75rem;
-  align-items: baseline;
-  margin-bottom: 0.35rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(90px, 140px) 2.2rem;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.3rem 0;
+  border-top: 1px solid rgba(212, 206, 192, 0.55);
+  cursor: help;
 }
 
 .factor-label {
   font-weight: 600;
-  font-size: 0.98rem;
+  font-size: 0.84rem;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .factor-code {
   display: inline-block;
-  margin-right: 0.35rem;
+  min-width: 2.1rem;
   color: var(--accent-deep);
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.76rem;
 }
 
 .priority-pill {
   display: inline-block;
-  margin-left: 0.35rem;
-  padding: 0.1rem 0.45rem;
+  margin-left: 0.3rem;
+  padding: 0 0.3rem;
   border-radius: 999px;
-  background: rgba(15, 107, 92, 0.12);
+  background: rgba(15, 107, 92, 0.14);
   color: var(--accent-deep);
-  font-size: 0.68rem;
+  font-size: 0.62rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  line-height: 1.4;
   vertical-align: middle;
 }
 
 .factor-value {
   font-variant-numeric: tabular-nums;
   font-weight: 700;
+  font-size: 0.85rem;
+  text-align: right;
   color: var(--accent-deep);
-  min-width: 2ch;
-}
-
-.factor-help {
-  margin: 0 0 0.55rem;
-  color: var(--muted);
-  font-size: 0.84rem;
-  line-height: 1.35;
 }
 
 .factor-item input[type="range"] {
   width: 100%;
+  height: 1rem;
+  margin: 0;
   accent-color: var(--accent);
   cursor: pointer;
-}
-
-.scale-ends {
-  display: flex;
-  justify-content: space-between;
-  color: var(--muted);
-  font-size: 0.75rem;
-  margin-top: 0.2rem;
 }
 
 .assess-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 
 .btn {
