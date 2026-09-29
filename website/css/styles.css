@@ -363,15 +363,20 @@ main,
 }
 
 .readiness-card {
-  padding: 1.5rem;
-  margin-bottom: 1.25rem;
+  display: grid;
+  grid-template-columns: minmax(10rem, 14rem) 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1rem 1.2rem;
+  margin-bottom: 0.9rem;
   animation: rise 0.5s ease both;
 }
 
 .readiness-level {
-  margin: 0.2rem 0 0.35rem;
+  margin: 0.1rem 0 0.15rem;
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  font-size: clamp(1.8rem, 3.5vw, 2.3rem);
+  line-height: 1.1;
   letter-spacing: -0.03em;
 }
 
@@ -380,20 +385,22 @@ main,
 .readiness-level[data-level="High"] { color: var(--high); }
 
 .readiness-org {
-  margin: 0 0 1.25rem;
+  margin: 0;
   color: var(--muted);
+  font-size: 0.82rem;
 }
 
 .prob-bars {
   display: grid;
-  gap: 0.75rem;
+  gap: 0.4rem;
 }
 
 .prob-row {
   display: grid;
-  grid-template-columns: 5.5rem 1fr 3.2rem;
-  gap: 0.75rem;
+  grid-template-columns: 4rem 1fr 3rem;
+  gap: 0.6rem;
   align-items: center;
+  font-size: 0.85rem;
 }
 
 .prob-row span:first-child {
@@ -401,7 +408,7 @@ main,
 }
 
 .prob-track {
-  height: 0.7rem;
+  height: 0.5rem;
   background: var(--paper-2);
   border-radius: 999px;
   overflow: hidden;
@@ -427,12 +434,12 @@ main,
 .shap-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
-  margin-bottom: 1.25rem;
+  gap: 0.9rem;
+  margin-bottom: 0.9rem;
 }
 
 .shap-card {
-  padding: 1.25rem 1.35rem 1.4rem;
+  padding: 0.9rem 1rem 1rem;
   animation: rise 0.55s ease both;
 }
 
@@ -447,15 +454,15 @@ main,
 }
 
 .shap-card h3 {
-  margin: 0 0 0.35rem;
+  margin: 0 0 0.15rem;
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 1.02rem;
 }
 
 .shap-note {
-  margin: 0 0 1rem;
+  margin: 0 0 0.6rem;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.76rem;
 }
 
 .shap-card ol {
@@ -463,27 +470,27 @@ main,
   padding: 0;
   list-style: none;
   display: grid;
-  gap: 0.7rem;
+  gap: 0.35rem;
 }
 
 .shap-card li {
   display: grid;
   grid-template-columns: auto 1fr auto;
-  gap: 0.65rem;
-  align-items: start;
-  padding: 0.7rem 0.8rem;
-  border-radius: 12px;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.35rem 0.55rem;
+  border-radius: 8px;
   background: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(212, 206, 192, 0.65);
 }
 
 .rank {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.2rem;
+  height: 1.2rem;
   border-radius: 50%;
   display: grid;
   place-items: center;
-  font-size: 0.75rem;
+  font-size: 0.66rem;
   font-weight: 700;
   color: white;
 }
@@ -493,16 +500,18 @@ main,
 
 .shap-meta strong {
   display: block;
-  font-size: 0.95rem;
+  font-size: 0.82rem;
+  line-height: 1.25;
 }
 
 .shap-meta span {
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 
 .shap-score {
   font-variant-numeric: tabular-nums;
+  font-size: 0.8rem;
   font-weight: 700;
   white-space: nowrap;
 }
@@ -515,19 +524,19 @@ main,
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 1.25rem 1.35rem 1.5rem;
+  padding: 0.9rem 1rem 1rem;
   animation: rise 0.6s ease both;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.9rem;
 }
 
 .shap-all h3 {
-  margin: 0 0 1rem;
+  margin: 0 0 0.6rem;
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: 1.02rem;
 }
 
 .advice-card {
-  padding: 1.35rem 1.45rem 1.55rem;
+  padding: 0.9rem 1.1rem 1rem;
   animation: rise 0.65s ease both;
   border-color: rgba(15, 107, 92, 0.28);
 }
@@ -537,18 +546,28 @@ main,
   justify-content: space-between;
   gap: 1rem;
   align-items: flex-start;
-  margin-bottom: 1rem;
+  margin-bottom: 0.6rem;
 }
 
 .advice-head h3 {
-  margin: 0.15rem 0 0.35rem;
+  margin: 0.1rem 0 0.15rem;
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: 1.08rem;
+}
+
+.advice-head .shap-note {
+  margin: 0;
+}
+
+.advice-head .btn {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.8rem;
 }
 
 .advice-body {
   border-top: 1px solid rgba(212, 206, 192, 0.75);
-  padding-top: 1rem;
+  padding-top: 0.7rem;
+  font-size: 0.86rem;
 }
 
 .advice-loading {
@@ -591,9 +610,9 @@ main,
 
 .advice-content h3,
 .advice-content h4 {
-  margin: 1rem 0 0.4rem;
+  margin: 0.8rem 0 0.3rem;
   font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-size: 0.95rem;
 }
 
 .advice-content h3:first-child,
@@ -603,26 +622,26 @@ main,
 }
 
 .advice-content p {
-  margin: 0 0 0.75rem;
-  line-height: 1.55;
+  margin: 0 0 0.5rem;
+  line-height: 1.45;
   color: var(--ink);
 }
 
 .advice-content ul {
-  margin: 0 0 0.9rem;
-  padding-left: 1.2rem;
+  margin: 0 0 0.6rem;
+  padding-left: 1.1rem;
   color: var(--ink);
 }
 
 .advice-content ol {
-  margin: 0 0 0.9rem;
-  padding-left: 1.3rem;
+  margin: 0 0 0.6rem;
+  padding-left: 1.2rem;
   color: var(--ink);
 }
 
 .advice-content li {
-  margin-bottom: 0.35rem;
-  line-height: 1.45;
+  margin-bottom: 0.2rem;
+  line-height: 1.4;
 }
 
 .advice-content li.md-cont {
@@ -633,29 +652,33 @@ main,
 .advice-content hr {
   border: none;
   border-top: 1px solid rgba(212, 206, 192, 0.75);
-  margin: 1rem 0;
+  margin: 0.6rem 0;
 }
 
 .waterfall {
   display: grid;
-  gap: 0.55rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.35rem 1.5rem;
 }
 
 .wf-row {
   display: grid;
-  grid-template-columns: minmax(8rem, 14rem) 1fr 4rem;
-  gap: 0.75rem;
+  grid-template-columns: minmax(7rem, 11rem) 1fr 3.2rem;
+  gap: 0.5rem;
   align-items: center;
 }
 
 .wf-label {
-  font-size: 0.88rem;
+  font-size: 0.76rem;
   font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .wf-track {
   position: relative;
-  height: 0.85rem;
+  height: 0.55rem;
   background: var(--paper-2);
   border-radius: 999px;
   overflow: hidden;
@@ -691,7 +714,7 @@ main,
 .wf-val {
   text-align: right;
   font-variant-numeric: tabular-nums;
-  font-size: 0.85rem;
+  font-size: 0.74rem;
   font-weight: 700;
 }
 
@@ -753,13 +776,19 @@ main,
     display: none;
   }
 
-  .wf-row {
+  .waterfall {
     grid-template-columns: 1fr;
-    gap: 0.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .readiness-card {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
   }
 
-  .wf-val {
-    text-align: left;
+  .wf-row {
+    grid-template-columns: 7rem 1fr 3rem;
   }
 }
 
